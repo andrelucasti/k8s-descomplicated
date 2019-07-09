@@ -1,0 +1,33 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: giropops-cron
+spec:
+  schedule: "*/1 * * * *"
+  # min hour day month weeken day command
+  # */1 a cada minuto
+  # 10 08 * * 1-5 All days, at 10:08AM of Monday - Friday 
+
+  # 0-59 0-23 1-31 1-12 0-7
+                      # 0 - Sunday
+                      # 1 - Monday
+                      # 2 - Tuesday
+                      # 3 - Wensday
+                      # 4 - Thurday
+                      # 5 - Friday
+                      # 6 - Saturday
+                      # 7 - Sunday
+                      
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: giropops-cron
+            image: busybox
+            args:
+            - /bin/sh
+            - -c
+            - date; echo Welcome at Kubernetes - LinuxTips VAIII ;sleep 30 
+          restartPolicy: OnFailure
+
