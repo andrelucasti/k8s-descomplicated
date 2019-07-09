@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: jenkins-pvc
+spec:
+  accessModes:
+    - ReadWriteMany
+  # RWO, #ROX, RWX
+  # RWO = ReadWriteOnce - Só pode ser escrito por um Node.
+  # ROX = ReadOnlyMany - O volume pode ser montado por vários nós porém como leitura.
+  # RWX = ReadWriteMany - Vários nodes podem montar esse volume por leitura e escrita.
+  resources:
+    requests:
+      storage: 1Gi

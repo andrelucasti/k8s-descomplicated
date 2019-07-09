@@ -1,0 +1,41 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+# meta data of the deployment.
+metadata:
+  labels: # this is key | value which put in the deployment or in the replica-set 
+    run: nginxBind
+    app: nginx
+  name: my-second-nginx
+  namespace: default
+# ---- Replica-set Region ----
+spec: # my template specification
+  replicas: 1 # when to create the deployment, the replica-set create 1 pod.
+  selector: 
+    matchLabels: # my replica set should match with my deployment with run:nginx
+      run: nginxBind
+  template:
+    metadata:
+      labels:
+        run: nginxBind
+        dc: NL
+# ---- Container Region ----  
+    spec: # my container specification
+      containers:
+      - image: nginx
+        imagePullPolicy: Always
+        name: nginx
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        resources:
+          limits:
+            memory: 1000Mi
+            cpu: 1000m
+          requests:
+            memory: 500Mi
+            cpu: 500m 
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30 # equals a 'kill -9'
+      nodeSelector:
+        disk: SSD

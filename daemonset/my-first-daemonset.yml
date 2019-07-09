@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+  name: first-daemonset
+spec:
+  template:
+    metadata:
+      labels:
+        system: Strigus
+    spec:
+      containers:
+      - image: grafana/grafana
+        name: grafana 
+        ports:
+        - containerPort: 80
+  updateStrategy:
+    type: RollingUpdate
