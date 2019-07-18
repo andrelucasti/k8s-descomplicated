@@ -1,0 +1,37 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    run: event
+  name: event-v2
+spec:
+  selector:
+    matchLabels:
+      run: event
+  template:
+    metadata:
+      labels:
+        run: event
+        version: "2.0"
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8181"
+        prometheus.io/path: "/actuator/prometheus"
+    spec:
+      containers:
+      - image: andrelucastic/event:2.0
+        imagePullPolicy: Always
+        name: event
+        ports:
+        - containerPort: 8181
+          protocol: TCP
+        resources:
+          limits:
+            memory: 512Mi
+            cpu: "500m"
+          requests:
+            memory: 250Mi
+            cpu: "250m"
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
