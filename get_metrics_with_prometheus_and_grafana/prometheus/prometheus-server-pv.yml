@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: prometheus-server
+  namespace: monitoring
+spec:
+  capacity:
+    storage: 2Gi
+  accessModes:
+  - ReadWriteMany
+  # RWO, #ROX, RWX
+  # RWO = ReadWriteOnce - Só pode ser escrito por um Node.
+  # ROX = ReadOnlyMany - O volume pode ser montado por vários nós porém como leitura.
+  # RWX = ReadWriteMany - Vários nodes podem montar esse volume por leitura e escrita.
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    path: /opt/dados
+    server: 192.168.0.14
+    readOnly: false
