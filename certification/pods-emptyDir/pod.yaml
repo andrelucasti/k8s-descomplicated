@@ -10,7 +10,7 @@ spec:
     image: busybox
     volumeMounts:
     - mountPath: /cache
-      name: cahce-volume
+      name: cache-volume
     ports:
     - containerPort: 80
   volumes:
