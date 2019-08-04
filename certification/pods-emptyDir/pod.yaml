@@ -1,20 +1,16 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: podNotPersistent
+  name: busybox
   labels:
-    name: podNotPersistent
+    name: busybox
 spec:
   containers:
-  - name: podNotPersistent
-    image: ububtu
+  - name: busybox
+    image: busybox
     volumeMounts:
     - mountPath: /cache
       name: cahce-volume
-    resources:
-      limits:
-        memory: "128Mi"
-        cpu: "500m"
     ports:
     - containerPort: 80
   volumes:
