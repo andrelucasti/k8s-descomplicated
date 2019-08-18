@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-configmap-env
+spec:
+  selector:
+    matchLabels:
+      app: deployment-configmap-env
+  template:
+    metadata:
+      labels:
+        app: deployment-configmap-env
+    spec:
+      containers:
+      - name: deployment-configmap-env
+        image: nginx
+        env:
+          - name: myconfigmap
+            valueFrom:
+              configMaptKeyRef:
+                name: myconfigmap
+                key: versionapp
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+      
