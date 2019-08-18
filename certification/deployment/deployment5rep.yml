@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dep5
+  labels:
+    app: nginx5rep
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: nginx5rep
+  template:
+    spec:
+      containers:
+      - name: nginx5rep
+        image: nginx
+        ports:
+        - containerPort: 80 
+      
