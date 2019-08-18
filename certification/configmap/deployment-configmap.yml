@@ -17,7 +17,7 @@ spec:
         env:
           - name: myconfigmap
             valueFrom:
-              configMaptKeyRef:
+              configMapKeyRef:
                 name: myconfigmap
                 key: versionapp
         resources:
