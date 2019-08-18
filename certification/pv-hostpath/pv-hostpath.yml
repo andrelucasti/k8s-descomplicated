@@ -22,5 +22,5 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   nfs:
     path: /opt/dados
-    server: 192.168.0.14
+    server: 172.31.32.69
     readOnly: false
